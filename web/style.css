@@ -1,0 +1,117 @@
+
+body{
+    background: -webkit-linear-gradient(15deg, #1A273A, #323A4D, #1A273A);
+	background: linear-gradient( 75deg, #1A273A, #323A4D, #1A273A);
+}
+
+h5, h4, p{
+    color:beige;
+}
+
+#logo-div{
+    text-align: center;
+}
+
+#logopng{
+    height: 5%;
+    width: 5%;
+}
+
+#companyLabel{
+    height: 10%;
+    width: 10%;
+}
+
+.modal-header{
+    display: block;
+    margin-bottom: 0%;
+}
+
+.modal-body{
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(245, 245, 220, 0.226);
+    height: 300px;
+    width: 500px;
+    margin-bottom: 1%
+}
+
+.modal-content {
+    display: flex;
+    align-items: center;
+
+}
+
+.input-div{
+    margin:auto;
+    display: block;
+    text-align: center;
+    background-color: rgba(245, 245, 240, 0.744);
+    border-radius: 1%;
+    width: 50%;
+    margin-bottom: .5%;
+}
+
+.button-text{
+    font-size: xx-small;
+    margin: 0px 0px 0px 0px;
+    color: black;
+}
+
+
+.btn{
+    height: auto;
+    width: auto;
+}
+
+.fileTextBox{
+    font-size: xx-small;
+    width: 60%;
+}
+
+
+.thermal-image{
+    display: none;
+    
+}
+
+
+img.crosshair {
+    cursor: crosshair;
+}
+
+
+.coordinate-point-draw{
+    border-radius: 50%;
+    height: 5px;
+    width: 5px;
+}
+
+.localization-display{
+    text-align: center;
+    display: none;
+    /* background-color: rgba(255, 255, 255, 0.976); */
+    height: 80%;
+    width: 90px;
+   
+}
+
+
+table, th, td {
+    border:1px solid black;
+    font-size: xx-small;
+    background-color: rgba(255, 255, 255, 0.976);
+  }
+
+.table {
+    overflow-y: scroll;   
+    overflow-x: hidden;   
+    height: 80%
+}
+
+  table{
+    width: 100%;
+  }
+

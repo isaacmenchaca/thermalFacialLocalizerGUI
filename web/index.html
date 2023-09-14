@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Thermal Facial Labeling GUI by Menchaca</title>
+
+        <!-- CSS Libraries -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+
+    </head>
+
+    <body>
+
+        <div class="main-container">
+            <div id = "logo-div">
+                <img id = "logopng" class = "animate__animated animate__rollIn center-align" src="img/HNL_logo.png">
+                <img id = "companyLabel" class = "animate__animated animate__fadeInUp" src="img/HNL_letters_logo.png">
+              </div>
+
+                
+                
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Thermal Facial Labeling</h5>
+                      </div>
+                      <div class="input-div animate__animated animate__fadeInUp">
+                        <button class="btn btn-outline-dark choose-file-button ">
+                            <p class="button-text">
+                                Choose File
+                            </p>
+                        </button>
+    
+                        <input class="fileTextBox">
+    
+                        </input>
+
+                        <button class="btn btn-outline-success go-button">
+                          <p class="button-text">
+                              GO
+                          </p>
+                        </button>
+                    </div>
+
+                      <div class="image-number-tracker">
+                        <h4 class="image-number-text"></h4>
+                      </div>
+                      <div class="modal-body">
+                          <img class="thermal-image" src="" >
+                        
+                        <div class="localization-display">
+                          <div class="table">
+                            <table>
+                              <tr>
+                                <th>Feature</th>
+                                <th>Coordinate</th>
+                              </tr>
+                            
+                              
+                              <tr><td>1</td><td id="coord1"></td></tr>
+                              <tr><td>2</td><td id="coord2"></td></tr>
+                              <tr><td>3</td><td id="coord3"></td></tr>
+                              <tr><td>4</td><td id="coord4"></td></tr>
+                              <tr><td>5</td><td id="coord5"></td></tr>
+                              <tr><td>6</td><td id="coord6"></td></tr>
+                              <tr><td>7</td><td id="coord7"></td></tr>
+                              <tr><td>8</td><td id="coord8"></td></tr>
+                              <tr><td>9</td><td id="coord9"></td></tr>
+                              <tr><td>10</td><td id="coord10"></td></tr>
+                              <tr><td>11</td><td id="coord11"></td></tr>
+                              <tr><td>12</td><td id="coord12"></td></tr>
+                              <tr><td>13</td><td id="coord13"></td></tr>
+                              <tr><td>14</td><td id="coord14"></td></tr>
+                              <tr><td>15</td><td id="coord15"></td></tr>
+                              <tr><td>16</td><td id="coord16"></td></tr>
+                              <tr><td>17</td><td id="coord17"></td></tr>
+                              <tr><td>18</td><td id="coord18"></td></tr>
+                              <tr><td>19</td><td id="coord19"></td></tr>
+                              <tr><td>20</td><td id="coord20"></td></tr>
+                              <tr><td>21</td><td id="coord21"></td></tr>
+                              <tr><td>22</td><td id="coord22"></td></tr>
+                              <tr><td>23</td><td id="coord23"></td></tr>
+                              <tr><td>24</td><td id="coord24"></td></tr>
+                              <tr><td>25</td><td id="coord25"></td></tr>
+                              <tr><td>26</td><td id="coord26"></td></tr>
+                              <tr><td>27</td><td id="coord27"></td></tr>
+                              <tr><td>28</td><td id="coord28"></td></tr>
+                              <tr><td>29</td><td id="coord29"></td></tr>
+                              <tr><td>30</td><td id="coord30"></td></tr>
+                              <tr><td>31</td><td id="coord31"></td></tr>
+                              <tr><td>32</td><td id="coord32"></td></tr>
+                              <tr><td>33</td><td id="coord33"></td></tr>
+                              <tr><td>34</td><td id="coord34"></td></tr>
+                              <tr><td>35</td><td id="coord35"></td></tr>
+                              <tr><td>36</td><td id="coord36"></td></tr>
+                              <tr><td>37</td><td id="coord37"></td></tr>
+                              <tr><td>38</td><td id="coord38"></td></tr>
+                              <tr><td>39</td><td id="coord39"></td></tr>
+                              <tr><td>40</td><td id="coord40"></td></tr>
+                              <tr><td>41</td><td id="coord41"></td></tr>
+                              <tr><td>42</td><td id="coord42"></td></tr>
+                              <tr><td>43</td><td id="coord43"></td></tr>
+                              <tr><td>44</td><td id="coord44"></td></tr>
+                              <tr><td>45</td><td id="coord45"></td></tr>
+                              <tr><td>46</td><td id="coord46"></td></tr>
+                              <tr><td>47</td><td id="coord47"></td></tr>
+                              <tr><td>48</td><td id="coord48"></td></tr>
+                              <tr><td>49</td><td id="coord49"></td></tr>
+                              <tr><td>50</td><td id="coord50"></td></tr>
+                              <tr><td>51</td><td id="coord51"></td></tr>
+                              <tr><td>52</td><td id="coord52"></td></tr>
+                              <tr><td>53</td><td id="coord53"></td></tr>
+                              <tr><td>54</td><td id="coord54"></td></tr>
+
+                          </table>
+                        </div>
+
+                          <button class="btn btn-light button-text prev-coord-button ">Previous Pts</button>
+                          <button class="btn btn-info button-text U-Net-coord-button ">U-Net</button>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary button-text previous-button">Previous</button>
+                        <button type="button" class="btn btn-primary button-text next-button">Next</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+
+        <!-- JS Libraries -->
+        <script type="text/javascript" src="/eel.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <script src="./script.js"></script>
+    </body>
+</html>
