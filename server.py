@@ -1,9 +1,14 @@
-import eel, json, os, cv2
+import eel, json, os, cv2, dlib
 import tkinter as tk
 from tkinter import filedialog
 import numpy as np
 import pandas as pd
 import base64
+from imutils import face_utils
+
+
+detector = dlib.simple_object_detector(os.path.join("models/", "dlib_face_detector.svm"))
+predictor = dlib.shape_predictor(os.path.join("models/", "dlib_landmark_predictor.dat"))
 
 
 eel.init('web')
@@ -111,7 +116,7 @@ def saveCurrentProceedNextImage(filePath, currentImage, currentSavedCoordinates)
             data = pd.concat([data, newData], ignore_index=True)
             data.to_csv(coordinatesFilePath, mode='w')
 
-    print(data)
+    # print(data)
 
     # now increment currentImage
     currentImage += 1
@@ -161,7 +166,7 @@ def goToPreviousImage(filePath, currentImage):
         facialLocalizations.append(feature)
 
     
-    print(facialLocalizations)
+    # print(facialLocalizations)
 
     thermalImages = np.load( filePath)/ 10 - 100
     thermalImages = thermalImages.reshape(-1, 288, 382)
@@ -192,6 +197,46 @@ def getCoordinates(filePath, currentImage):
         facialLocalizations.append(feature)
 
     return facialLocalizations
+
+@eel.expose
+def dlibCoordinates(filePath, currentImage):
+    thermalImages = np.load( filePath)/ 10 - 100
+    thermalImages = thermalImages.reshape(-1, 288, 382)
+    thermalImage = thermalImages[currentImage - 1, :, :]
+    min_temp = np.min(thermalImage)
+    max_temp = np.max(thermalImage)
+
+    normalized_thermal_image = ((thermalImage - min_temp) / (max_temp - min_temp) * 255).astype(np.uint8)       
+    rects = detector(normalized_thermal_image, upsample_num_times=1)
+
+    faceDetected = False
+    facialLocalizations = []
+    if rects:
+        print("dlib found face")
+
+        faceDetected = True
+
+        # convert the dlib rectangle into an OpenCV bounding box and
+                # draw a bounding box surrounding the face
+        (x, y, w, h) = face_utils.rect_to_bb(rects[0])
+        # predict the location of facial landmark coordinates, 
+                # then convert the prediction to an easily parsable NumPy array
+        shape = predictor(normalized_thermal_image, rects[0])
+        shape = face_utils.shape_to_np(shape)
+
+        for i, (sx, sy) in enumerate(shape):
+            # print(i, sx, sy, type(sx))
+
+            facialLocalizations.append([int(sx), int(sy)])
+
+
+    else:
+        print("dlib found no face")
+
+
+
+    return faceDetected, facialLocalizations
+
 
 
 

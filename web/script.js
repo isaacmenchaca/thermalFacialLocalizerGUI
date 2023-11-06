@@ -34,8 +34,8 @@ $( document ).ready(function() {
         onClickPreviousCoordButton();
     });
 
-    $(".U-Net-coord-button").click(function(){
-        onClickUnetButton();
+    $(".dlib-button").click(function(){
+        onClickDlibButton();
     });
 
 
@@ -58,7 +58,7 @@ $( document ).ready(function() {
 
         if(currentDot < 54){
             currentSavedCoordinates.push([x, y])
-            console.log(currentSavedCoordinates);
+            // console.log(currentSavedCoordinates);
 
             $(this).parent().append(`<div id="dot${currentDot}" style="width: ${size}px; height: ${size}px; background: black; position: absolute; top: ${adjustedY}px; left: ${adjustedX}px; border-radius: ${size}px"/>`); 
             
@@ -98,7 +98,7 @@ $( document ).ready(function() {
 
                   $(`#coord${shortestDistanceIndex + 1}`).html("(" + x + ", " + y + ")");
 
-                  console.log(currentSavedCoordinates);
+                //   console.log(currentSavedCoordinates);
             }
         }
     
@@ -119,7 +119,7 @@ $( document ).ready(function() {
              }
             
             currentDot -= 1;
-            console.log(currentSavedCoordinates);
+            // console.log(currentSavedCoordinates);
               
         }
     })
@@ -138,7 +138,7 @@ $( document ).ready(function() {
 
       
     async function onClickGoButton(){
-        console.log("GO!")
+        
 
         let dataFromPython = await eel.loadThermalInfo(filePath)();
         numImages = dataFromPython[0]
@@ -174,10 +174,10 @@ $( document ).ready(function() {
 
         if (nextExists){
             let dataFromPython = await eel.getCoordinates(filePath, currentImage)();
-            console.log(dataFromPython)
+            // console.log(dataFromPython)
 
             dataFromPython.forEach(function(item, index){
-                console.log(item)
+                // console.log(item)
                 const size = 4;
                 
                 var x = item[0];
@@ -220,9 +220,9 @@ $( document ).ready(function() {
 
         // call server.py: load up previous image here, and get previous coordinates
         let dataFromPython = await eel.goToPreviousImage(filePath, currentImage)();
-        console.log(dataFromPython)
+        // console.log(dataFromPython)
         dataFromPython.forEach(function(item, index){
-            console.log(item)
+            // console.log(item)
             const size = 4;
             
             var x = item[0];
@@ -248,8 +248,6 @@ $( document ).ready(function() {
         $(".next-button").prop('disabled', false);
     }
 
-    // NEW BUILD, WE ARE HERE. =======================================================
-
     async function onClickPreviousCoordButton(){
         // clean up any work first. Clears coordinate info.
         newImageCleanUp();
@@ -258,7 +256,7 @@ $( document ).ready(function() {
         let dataFromPython = await eel.getCoordinates(filePath, currentImage - 1)();
 
         dataFromPython.forEach(function(item, index){
-            console.log(item)
+            // console.log(item)
             const size = 4;
             
             var x = item[0];
@@ -284,8 +282,37 @@ $( document ).ready(function() {
 
     }
 
-    function onClickUnetButton(){
-        console.log("Make implementation here.")
+    async function onClickDlibButton(){
+        // clean up any work first. Clears coordinate info.
+        newImageCleanUp();
+
+
+        let dataFromPython = await eel.dlibCoordinates(filePath, currentImage)();
+    
+        dataFromPython[1].forEach(function(item, index){
+            // console.log(item)
+            const size = 4;
+            
+            var x = item[0];
+            var y = item[1];
+
+            // Calculate the adjusted drawed circle.
+            var adjustedX = x + 1.5 * size;
+            var adjustedY = y + size;
+            $(".modal-body").append(`<div id="dot${index}" style="width: ${size}px; height: ${size}px; background: black; position: absolute; top: ${adjustedY}px; left: ${adjustedX}px; border-radius: ${size}px"/>`); 
+       
+            // populate this because when we press next itll save the same values.
+            currentSavedCoordinates.push([x, y])
+
+            // update table to reflect these coordinates.
+            $(`#coord${index + 1}`).html("(" + x + ", " + y + ")");
+        })
+
+        // at the end, set number of dots to 3 (possible index of 0, 1, or 2) to reflect state of how many dots drawn.
+        currentDot = 54
+
+        // set disabled to false since we have 3 points already available.
+        $(".next-button").prop('disabled', false);
     }
 
 
